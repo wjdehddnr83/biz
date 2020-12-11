@@ -1,0 +1,15 @@
+---
+title: "4번"
+author: "Jeong DongWook"
+date: '2020 12 12 '
+output:
+  word_document: default
+  html_document: default
+---
+
+#25세 이상 30대 소비자를 대상으로 남성과 여성을 구분한 데이터#
+##여성 데이터##
+[https://datalab.naver.com/keyword/trendResult.naver?hashKey=N_d5671baf9762185a7c8bb236e13c0bd5]
+
+##남성 데이터##
+[https://datalab.naver.com/keyword/trendResult.naver?hashKey=N_340d46404c4a731798ebc8c1393f0331]

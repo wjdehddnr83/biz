@@ -1,0 +1,41 @@
+---
+title: "기말고사 1번문제"
+author: "Jeong DongWook"
+date: '2020 12 11 '
+output: html_document
+---
+
+
+
+```{r}
+library(ggmap)
+register_google(key = 'AIzaSyACKrQss7YCA1ov4tsrXvqYpMMwTpmWtrA')
+```
+
+```{r}
+name <- c("태백산 국립공원","북한산 국립공원","치악산 국립공원", "오대산 국립공원")
+addr <- c("강원 태백시 혈동", "경기 고양시 덕양구 대서문길 375", "강원 원주시 소초면 무쇠점2길 26", "강원 홍천군 내면 오대산로 2")
+
+gc <- geocode(enc2utf8(addr))
+gc
+
+df <- data.frame(name = name,
+                 lon = gc$lon,
+                 lat = gc$lat)
+df
+
+cen <- c(mean(df$lon), mean(df$lat))
+map <- get_googlemap(center = cen,
+                     maptype = "roadmap",
+                     zoom = 6,
+                     size = c(640, 640),
+                     marker =gc)
+ggmap(map)
+
+gmap <- ggmap(map)
+gmap + geom_text(data = df,
+                 aes(x= lon, y =lat),
+                 size = 5,
+                 label = df$name)
+```
+

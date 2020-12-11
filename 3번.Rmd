@@ -1,0 +1,25 @@
+---
+title: "3번문제"
+author: "Jeong DongWook"
+date: '2020 12 12 '
+output: html_document
+---
+
+```{r}
+Sys.setenv(JAVA_HOME='C:/Program Files/Java/jre1.8.0_271')
+```
+
+```{r}
+library(wordcloud)
+library(KoNLP)
+library(RColorBrewer)
+```
+
+```{r}
+setwd("D:/source")
+text <- readLines("steve Jobs.txt", encoding = "UTF-8")
+buildDictionary(ext_dic = "woorimalsam")
+pal2 <- brewer.pal(8, "Dark2")
+noun <- sapply(text, extractNoun, USE.NAMES = F)
+noun
+```

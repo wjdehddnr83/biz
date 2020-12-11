@@ -1,0 +1,64 @@
+---
+title: "2번문제"
+author: "Jeong DongWook"
+date: '2020 12 12 '
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(ggmap)
+register_google(key='AIzaSyACKrQss7YCA1ov4tsrXvqYpMMwTpmWtrA')
+library(treemap)
+library(dplyr)
+```
+
+```{r}
+data(GNI2014)
+str(GNI2014)
+View(GNI2014)
+```
+
+```{r}
+gni <- GNI2014 %>% filter(continent %in% c("North America"))
+
+```
+
+```{r}
+gc <- geocode(enc2utf8("North America"))
+cen <- as.numeric(gc)
+map <- get_googlemap(center = cen,
+                     maptype = "roadmap")
+ggmap(map)
+```
+
+```{r}
+addr2 <- c("BMU", "USA", "CAN", "BHS", "TTO", "PRI", "BRB", "KNA", "ATG", "PAN", "CRI", 
+           "MEX", "GRD", "LCA", "DMA", "VCT", "DOM", "JAM", "BLZ", "SLV", "GTM", "HND", "NIC", "HTI")
+gc2 <- geocode(enc2utf8(addr2))
+iso3 <- c("BMU", "USA", "CAN", "BHS", "TTO", "PRI", "BRB", "KNA", "ATG", "PAN", "CRI", 
+          "MEX", "GRD", "LCA", "DMA", "VCT", "DOM", "JAM", "BLZ", "SLV", "GTM", "HND", "NIC", "HTI")
+
+AA <- cbind(gni, gc2)
+AA
+```
+
+```{r}
+gmap <- ggmap(map)
+gmap + geom_point(data = AA,
+                  aes(x = lon, y = lat, size=population),
+                  alpha = 0.5,
+                  col = "green")+
+  scale_size_continuous(range = c(1,5))
+
+map <- get_googlemap(center = cen,
+                     maptype = "hybrid",
+                     zoom = 3)
+gmap <- ggmap(map)
+gmap + geom_point(data = AA,
+                  aes(x = lon, y = lat, size = population),
+                  alpha = 0.5,
+                  col = "green")+
+  scale_size_continuous(range = c(1, 14))
+
+```
